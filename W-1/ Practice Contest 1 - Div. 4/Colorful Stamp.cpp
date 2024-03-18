@@ -7,25 +7,24 @@ using namespace std;
 void solve()
 {
     int n;
-    cin >> n;
-    string s;
-    cin >> s;
-    int r, b;
-    for (int i = 0; i < s.size(); i++)
+    string str;
+    cin >> n >> str;
+    int red, blue;
+    for (int i = 0; i < str.size(); i++)
     {
-        r = 0;
-        b = 0;
-        if (s[i] != 'W')
+        red = 0;
+        blue = 0;
+        if (str[i] != 'W')
         {
-            while (i < n && s[i] != 'W')
+            while (i < n && str[i] != 'W')
             {
-                if (s[i] == 'R')
-                    r++;
-                if (s[i] == 'B')
-                    b++;
+                if (str[i] == 'R')
+                    red++;
+                if (str[i] == 'B')
+                    blue++;
                 i++;
             }
-            if (!r || !b)
+            if (!red || !blue)
             {
                 cout << "NO" << endl;
                 return;

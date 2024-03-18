@@ -9,24 +9,25 @@ void solve()
     cin >> n;
 
     map<string, int> wordCount;
-    vector<vector<string>> words(3, vector<string>(n));
+    map<string, int> a;
+    map<string, int> b;
+    map<string, int> c;
     vector<int> points(3, 0);
-    
-    for (int j = 0; j < n; ++j)
-    {
-        cin >> words[0][j];
-        wordCount[words[0][j]]++;
-    }
 
-    for (int j = 0; j < n; ++j)
+    for (ll i = 0; i < 3; i++)
     {
-        cin >> words[1][j];
-        wordCount[words[1][j]]++;
-    }
-    for (int j = 0; j < n; ++j)
-    {
-        cin >> words[2][j];
-        wordCount[words[2][j]]++;
+        for (int j = 0; j < n; ++j)
+        {
+            string str;
+            cin >> str;
+            if (i == 0)
+                a[str]++;
+            else if (i == 1)
+                b[str]++;
+            else
+                c[str]++;
+            wordCount[str]++;
+        }
     }
 
     for (const auto &entry : wordCount)
@@ -34,27 +35,34 @@ void solve()
         int count = entry.second;
         if (count == 1)
         {
-            for (ll i = 0; i < words.size(); ++i)
+            if (a[entry.first])
             {
-                if (find(words[i].begin(), words[i].end(), entry.first) != words[i].end())
-                {
-                    points[i] += 3;
-                    break;
-                }
+                points[0] += 3;
+            }
+            else if (b[entry.first])
+            {
+                points[1] += 3;
+            }
+            else
+            {
+                points[2] += 3;
             }
         }
         else if (count == 2)
         {
-            for (ll i = 0; i < words.size(); ++i)
+            if (a[entry.first])
             {
-                if (find(words[i].begin(), words[i].end(), entry.first) != words[i].end())
-                {
-                    points[i]++;
-                }
+                points[0] += 1;
+            }
+            if (b[entry.first])
+            {
+                points[1] += 1;
+            }
+            if (c[entry.first])
+            {
+                points[2] += 1;
             }
         }
-
-        // Else don't need to increase.
     }
 
     for (int i = 0; i < 3; ++i)
