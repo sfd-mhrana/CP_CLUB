@@ -16,36 +16,25 @@ int main()
     {
         cin >> arr1[i];
     }
-
-    ll count = 0;
-    ll prev = INT_MIN;
-    ll prevC = 0;
-    ll j = 0;
-
     for (ll i = 0; i < m; i++)
     {
         cin >> arr2[i];
-        if (arr2[i] == prev && prev != INT_MIN)
-        {
-            count += prevC;
-            j++;
-        }
-        else
-        {
-            prev = arr2[i];
-            prevC = 0;
-            for (j = 0; arr1[j] <= arr2[i]; j++)
-            {
-                if (arr2[i] == arr1[j])
-                {
-                    count++;
-                    prevC++;
-                }
-            }
-        }
     }
 
-    cout << count << endl;
+    ll ans=0;
+    for(int i=0,s=0,e=0; i<m; i++)
+    {
+        while(s<n && arr1[s]<arr2[i])
+        {
+            s++;
+        }
 
+        while(e<n && arr1[e]<=arr2[i])
+        {
+            e++;
+        }
+        ans+=e-s;
+    }
+    cout<<ans<<endl;
     return 0;
 };
