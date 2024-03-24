@@ -1,52 +1,50 @@
 #include <bits/stdc++.h>
 using namespace std;
-
 #define ll long long
-#define endl "\n"
 
-const int SMALL_LETTER_STATING_POINT = 97;
-const int CAPITAL_LETTER_STATING_POINT = 65;
-
-void solve()
-{
-    ll n;
-    cin >> n;
-    ll arr[n];
-
-    unordered_map<ll, ll> elementCount;
-    for (ll i = 0; i < n; i++)
-    {
-        cin >> arr[i];
-        elementCount[arr[i]]++;
-    }
-
-    ll highestDuplicate = 0, maxCount = 0;
-    for (auto it = elementCount.begin(); it != elementCount.end(); ++it)
-    {
-        if (it->second > maxCount)
-        {
-            highestDuplicate = it->first;
-            maxCount = it->second;
-        }
-    }
-
-    ll res = n - maxCount;
-    
-    ll ans = res;
-    while (res > 0)
-    {
-    }
+void solve(){
+  ll n;
+  cin>>n;
+  ll arr[n];
+  map<ll, ll> mp;
+  for(ll i=0;i<n;i++){
+    cin>>arr[i];
+    mp[arr[i]]++;
+  }
+  
+   ll heightNo=INT_MIN;
+   map<ll, ll>::iterator it = mp.begin();
+   while (it != mp.end()) {
+           heightNo=max(heightNo,it->second ) ;
+        ++it;
+   }
+   ll needToReplace=n-heightNo;
+   
+   //cout<<heightNo<<" "<<needToReplace<<" ";
+   if(needToReplace<=0){
+     cout<<0<<endl;
+     return;
+   }
+   
+   ll res=0;
+ 
+   while(needToReplace>0){
+     ll ref=needToReplace-heightNo;
+     res+=(ref>=0?heightNo:needToReplace)+1;
+     
+     heightNo+=heightNo;
+     needToReplace=ref;
+   }
+   
+   cout<<res<<endl;
 }
 
-int main()
+
+int main() 
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    ll t;
-    cin >> t;
-    while (t--)
-    {
-        solve();
-    }
-    return 0;
-};
+  ll t;
+  cin>>t;
+  while(t--){
+    solve();
+  }
+}
