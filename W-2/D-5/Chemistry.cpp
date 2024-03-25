@@ -31,8 +31,24 @@ void solve()
    string s;
    cin>>s;
 
+   ll arr[26]={0};
    
-
+   for(ll i=0;i<n;i++){
+     int index=(int)s[i]-SMALL_LETTER_STATING_POINT;
+     arr[index]++;
+   }
+   
+   
+   ll one=0;
+   for(ll i=0;i<26;i++){
+      if(arr[i]%2==1)one++;
+   }
+    
+    if(one<=k+1){
+      cout<<"YES"<<endl;
+    }else{
+      cout<<"NO"<<endl;
+    }
 }
 
 int main()
