@@ -11,37 +11,41 @@ int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    ll n, k;
-    cin >> n >> k;
-    ll arr[n];
-    for (ll i = 0; i < n; i++)
-    {
-        cin >> arr[i];
-    }
+
+    string s;
+    ll k;
+    cin >> s >> k;
 
     map<ll, ll> freq;
     ll distinct = 0, le = 0;
     ll l = 0, r = 0;
-    for (; r < n; ++r)
+    bool found = false;
+    for (; r < s.size(); ++r)
     {
-        if (freq[arr[r]] == 0)
+        if (freq[(int)s[r]] == 0)
         {
             distinct++;
         }
-        freq[arr[r]]++;
+        freq[(int)s[r]]++;
         while (distinct > k)
         {
-            freq[arr[l]]--;
-            if (freq[arr[l]] == 0)
+            freq[(int)s[l]]--;
+            if (freq[(int)s[l]] == 0)
             {
                 distinct--;
             }
             l++;
         }
-        le += r - l + 1;
+
+        if (distinct == k)
+        {
+            found = true;
+            le = max(le, r - l + 1);
+        }
     }
-
-    cout << le << endl;
-
+    if (found)
+        cout << le << endl;
+    else
+        cout << -1 << endl;
     return 0;
 };
