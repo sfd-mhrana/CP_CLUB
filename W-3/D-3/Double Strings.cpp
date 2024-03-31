@@ -7,42 +7,31 @@ using namespace std;
 const int SMALL_LETTER_STATING_POINT = 97;
 const int CAPITAL_LETTER_STATING_POINT = 65;
 
-void solve()
-{
-    ll n;
+void solve() {
+    int n;
     cin >> n;
 
     vector<string> arr(n);
-
-    map<string, bool> w;
-    for (ll i = 0; i < n; i++)
-    {
+    unordered_set<string> words;
+    for (int i = 0; i < n; i++) {
         cin >> arr[i];
-        if (w.find(arr[i]) == w.end())
-        {
-            w[arr[i]] = true;
-        }
+        words.insert(arr[i]);
     }
 
     string ans = "";
-    for (int i = 0; i < n; i++)
-    {
-        if (arr[i].size() == 1)
-        {   
-            ans = ans + "0";
+    for (const string& word : arr) {
+        if (word.size() == 1) {
+            ans += '0';
             continue;
         }
         char flag = '0';
-        int len = arr[i].length();
-        for (int j = 0; j < len; j++)
-        {
-            if (w.count(arr[i].substr(0, j)) && w.count(arr[i].substr(j, len)))
-            {
+        for (int j = 1; j < word.size(); j++) {
+            if (words.count(word.substr(0, j)) && words.count(word.substr(j))) {
                 flag = '1';
                 break;
             }
         }
-        ans = ans + flag;
+        ans += flag;
     }
 
     cout << ans << endl;
