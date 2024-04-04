@@ -11,29 +11,35 @@ void solve()
 {
     ll n;
     cin >> n;
+    vector<ll> vt(n);
+    for (ll i = 0; i < n; i++)
+    {
+        cin >> vt[i];
+    }
+
     if (n == 1)
     {
-        ll num;
-        cin >> num;
         cout << 0 << endl;
         return;
     }
-    else
+
+    ll ans = vt[n - 1] - vt[0];
+    for (ll i = 1; i < n; i++)
     {
-        ll hi = INT_MIN;
-        ll lw = INT_MAX;
-        for (ll i = 0; i < n; i++)
-        {
-            ll num;
-            cin >> num;
-            if (num != 0)
-            {
-                hi = max(hi, num);
-                lw = min(lw, num);
-            }
-        }
-        cout << (hi - lw) << endl;
+        ans = max(ans, vt[i] - vt[0]);
     }
+
+    for (ll i = 0; i < n - 1; i++)
+    {
+        ans = max(ans, vt[n - 1] - vt[i]);
+    }
+
+    for (ll i = 1; i < n; i++)
+    {
+        ans = max(ans, vt[i - 1] - vt[i]);
+    }
+
+    cout << ans << endl;
 }
 
 int main()
