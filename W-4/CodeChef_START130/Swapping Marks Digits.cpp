@@ -7,18 +7,22 @@ using namespace std;
 const int SMALL_LETTER_STATING_POINT = 97;
 const int CAPITAL_LETTER_STATING_POINT = 65;
 
+ll reverseToLL(ll num)
+{
+    string s = to_string(num);
+    reverse(s.begin(), s.end());
+    ll res = stoll(s, nullptr, 10);
+    return res;
+}
+
 void solve()
 {
-    ll n, an = -1, orr = 0;
-    cin >> n;
-    ll arr[n];
-    for (ll i = 0; i < n; i++)
-    {
-        cin >> arr[i];
-        orr |= arr[i];
-        an &= arr[i];
-    }
-    cout << (orr - an) << '\n';
+    ll a, b;
+    cin >> a >> b;
+    if (a > b || reverseToLL(a) > b || a > reverseToLL(b) || reverseToLL(a) > reverseToLL(b))
+        cout << "Yes" << endl;
+    else
+        cout << "No" << endl;
 }
 
 int main()
