@@ -17,19 +17,25 @@ void solve()
     ll n;
     cin >> n;
     vinll(arr, n);
-    
-    ll ans = 1e9;
+
+
+    ll brr[n];
+    ll maxO = 0;
+    bool p = 1;
     for (ll i = 0; i < n; i++)
     {
-        ll cur = 0;
-        if (i > 0)
-            cur = max(cur, abs(arr[i] - arr[i - 1]));
-        if (i + 1 < n)
-            cur = max(cur, abs(arr[i] - arr[i + 1]));
-        ans = min(ans, cur);
+        cin >> brr[i];
+        maxO = max(maxO, arr[i] - brr[i]);
     }
 
-    cout << ans << endl;
+    for (ll i = 0; i < n; i++)
+        if (arr[i] - maxO < brr[i] && brr[i] != 0)
+            p = 0;
+
+    if (p)
+        cout << "YES" << endl;
+    else
+        cout << "NO" << endl;
 }
 
 int main()

@@ -16,20 +16,34 @@ void solve()
 {
     ll n;
     cin >> n;
-    vinll(arr, n);
-    
-    ll ans = 1e9;
-    for (ll i = 0; i < n; i++)
+    vector<ll> v;
+    set<ll> s;
+    for (ll p = 0; p < n; p++)
     {
-        ll cur = 0;
-        if (i > 0)
-            cur = max(cur, abs(arr[i] - arr[i - 1]));
-        if (i + 1 < n)
-            cur = max(cur, abs(arr[i] - arr[i + 1]));
-        ans = min(ans, cur);
+        ll x;
+        cin>>x;
+        if ((x <= n) && (!s.count(x)))
+            s.insert(x);
+        else
+            v.push_back(x);
     }
 
-    cout << ans << endl;
+    sort(v.begin(), v.end());
+
+    ll cnt(v.size()), idx(0);
+    for (ll p = 1; p <= n; p++)
+    {
+        if (s.count(p))
+            continue;
+        if (v[idx] <= 2 * p)
+        {
+            cnt = -1;
+            break;
+        }
+        ++idx;
+    }
+
+    cout<<cnt<<endl;
 }
 
 int main()
