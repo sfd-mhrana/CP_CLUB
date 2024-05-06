@@ -11,21 +11,28 @@ using namespace std;
 #define fl(i, n) for (int i = 0; i < n; i++)
 #define py cout << "YES" << endl;
 #define pn cout << "NO" << endl;
+#define fastread() (ios_base::sync_with_stdio(false), cin.tie(NULL));
 
 const int SMALL_LETTER_STATING_POINT = 97;
 const int CAPITAL_LETTER_STATING_POINT = 65;
 
 void solve()
 {
-    ll n,m,x,y;
-    cin>>n>>m>>x>>y;
-    cout<<((n*x)+(m*y))<<endl;
+    ll n;
+    cin >> n;
+    for (ll j = 1; j <= n; j++)
+        cout << 2 * j << " ";
+    cout<<endl;
 }
 
 int main()
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    solve();
+    fastread();
+    ll t;
+    cin >> t;
+    while (t--)
+    {
+        solve();
+    }
     return 0;
 };
