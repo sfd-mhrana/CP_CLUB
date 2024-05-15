@@ -18,34 +18,47 @@ ll lcm(ll a, ll b) { return ((a * b) / gcd(a, b)); }
 const int SMALL_LETTER_STATING_POINT = 97;
 const int CAPITAL_LETTER_STATING_POINT = 65;
 
+vector<ll> prime = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31};
+
 void solve()
 {
+    ll n;
+    cin >> n;
+    vector<ll> rem(n);
+    vinll(v,n);
+    ll cnt = 0;
+    for (auto x : prime)
+    {
+        bool ok = false;
+        for (ll i = 0; i < n; i++)
+        {
+            if (rem[i] == 0 && v[i] % x == 0)
+            {
+                if (!ok)
+                {
+                    ok = true;
+                    ++cnt;
+                }
+                rem[i] = cnt;
+            }
+        }
+    }
+    cout << cnt << endl;
+    for (auto x : rem)
+    {
+        cout << x << " ";
+    }
+    cout << endl;
 }
 
 int main()
 {
     fastread();
-
-    ll n;
-    cin >> n;
-
-    ll mx = 0;
-    vector<ll> v(n);
-    fl(i, n)
+    ll t;
+    cin >> t;
+    while (t--)
     {
-        cin >> v[i];
-        mx = max(mx, v[i]);
+        solve();
     }
-
-    ll gc = 0;
-    ll sum = 0;
-    for (auto x : v)
-    {
-        gc = gcd(gc, mx - x);
-        sum += (mx - x);
-    }
-    ll ans = (gc == 0 ? 0 : sum / gc);
-    cout << ans << " " << gc << endl;
-
     return 0;
 };

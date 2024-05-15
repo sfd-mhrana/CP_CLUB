@@ -25,27 +25,28 @@ void solve()
 int main()
 {
     fastread();
-
-    ll n;
-    cin >> n;
-
-    ll mx = 0;
-    vector<ll> v(n);
-    fl(i, n)
+    ll x, y;
+    while (cin >> x >> y)
     {
-        cin >> v[i];
-        mx = max(mx, v[i]);
-    }
 
-    ll gc = 0;
-    ll sum = 0;
-    for (auto x : v)
-    {
-        gc = gcd(gc, mx - x);
-        sum += (mx - x);
-    }
-    ll ans = (gc == 0 ? 0 : sum / gc);
-    cout << ans << " " << gc << endl;
+        if (x == y)
+        {
+            cout << "=";
+            return 0;
+        }
 
+        double a, b;
+        a = y * log(x);
+        b = x * log(y);
+
+        if (a == b)
+            cout << "=";
+        else if (a > b)
+            cout << ">";
+        else
+            cout << "<";
+
+        return 0;
+    }
     return 0;
 };

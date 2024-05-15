@@ -20,32 +20,48 @@ const int CAPITAL_LETTER_STATING_POINT = 65;
 
 void solve()
 {
+    ll a, b, l;
+    cin >> a >> b >> l;
+    ll ans = 0;
+    ll x = 0;
+    if (a == b)
+    {
+        ll y = 1;
+        while (l % b == 0)
+        {
+            l /= b;
+            y++;
+        }
+        cout << y << "\n";
+        return;
+    }
+    set<int> k;
+    while (true)
+    {
+        if (int(pow(a, x)) > l)
+            break;
+        if ((l % int(pow(a, x))) != 0)
+            break;
+        ll curr = l / int(pow(a, x));
+        k.insert(curr);
+        while (curr % b == 0)
+        {
+            curr /= b;
+            k.insert(curr);
+        }
+        x++;
+    }
+    cout << k.size() << "\n";
 }
 
 int main()
 {
     fastread();
-
-    ll n;
-    cin >> n;
-
-    ll mx = 0;
-    vector<ll> v(n);
-    fl(i, n)
+    ll t;
+    cin >> t;
+    while (t--)
     {
-        cin >> v[i];
-        mx = max(mx, v[i]);
+        solve();
     }
-
-    ll gc = 0;
-    ll sum = 0;
-    for (auto x : v)
-    {
-        gc = gcd(gc, mx - x);
-        sum += (mx - x);
-    }
-    ll ans = (gc == 0 ? 0 : sum / gc);
-    cout << ans << " " << gc << endl;
-
     return 0;
 };
