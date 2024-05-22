@@ -16,30 +16,25 @@ ll lcm(ll a,ll b){return ((a*b)/gcd(a,b));}
 const int SMALL_LETTER_STATING_POINT=97;
 const int CAPITAL_LETTER_STATING_POINT=65;
 
-ll countSubArraysWithSumX(vector<ll>& arr, ll x) {
-    ll n = arr.size();
-    unordered_map<ll, ll> freq;
-    ll sum = 0, count = 0;
-    
-    for (ll i = 0; i < n; ++i) {
-        sum += arr[i];
-        if (sum == x)
-            count++;
-        if (freq.find(sum - x) != freq.end())
-            count += freq[sum - x];
-        freq[sum]++;
-    }
 
-    return count;
+void solve(){
+    ll n,k,q;
+    cin>>n>>k>>q;
+
+    vinll(arr,n);
+    vinll(brr,n);
+
+    
+
 }
 
 
 int main(){
    fastread();
-    ll n,x;
-    while(cin>>n>>x){
-        vinll(arr,n);
-        cout<<countSubArraysWithSumX(arr,x);
+    ll t;
+    cin>>t;
+    while(t--){
+        solve();
     }
     return 0;
 };
