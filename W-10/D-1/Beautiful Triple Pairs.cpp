@@ -18,14 +18,27 @@ const int CAPITAL_LETTER_STATING_POINT=65;
 
 
 void solve(){
-    ll n,k,q;
-    cin>>n>>k>>q;
-
-    vinll(arr,n);
-    vinll(brr,n);
-
+    int n;
+    cin >> n;
     
-
+    vinll(arr,n);
+    
+    map<tuple<ll, ll, ll>, ll> cnt;
+    long long ans = 0;
+    for (ll i = 0; i < n - 2; ++i) {
+        tuple<ll, ll, ll> triplet = make_tuple(arr[i], arr[i + 1], arr[i + 2]);
+        vector<tuple<ll, ll, ll>> mist(3);
+        mist[0] = make_tuple(0, arr[i + 1], arr[i + 2]);
+        mist[1] = make_tuple(arr[i], 0, arr[i + 2]);
+        mist[2] = make_tuple(arr[i], arr[i + 1], 0);
+ 
+        for (auto &trip : mist) {
+            ans += cnt[trip] - cnt[triplet];
+            cnt[trip]++;
+        }
+        cnt[triplet]++;
+    }
+    cout << ans << endl;
 }
 
 

@@ -22,48 +22,42 @@ void solve()
 {
     ll n;
     cin >> n;
-
     vinll(arr, n);
-
-    map<ll, ll> st;
-    ll maxL = 0;
-    ll count = 0;
-
-    ll l = 0, r = 0;
-    while (l <= r && r < n)
+    vector<ll> freq(n + 5);
+    for (ll i = 0; i < n; i++)
+        freq[arr[i]]++;
+        
+    bool once = false;
+    ll ans = -1;
+    for (ll i = 0; i < n + 5; i++)
     {
-        if (!st[arr[r]])
+        if (freq[i] == 0)
         {
-            st[arr[r]]++;
-            count++;
-            r++;
+            ans = i;
+            break;
         }
-        else
+        if (freq[i] == 1)
         {
-            maxL = max(maxL, count);
-            if (arr[l] == arr[r])
-                l++;
-            else
+            if (once)
             {
-                ll minius = 0;
-                while (arr[l] != arr[r])
-                {
-                    minius++;
-                    st[arr[l]]--;
-                    l++;
-                }
-                l++;
-                count -= (minius);
+                ans = i;
+                break;
             }
-            r++;
+            once = true;
         }
     }
-    cout << maxL << endl;
+
+    cout << ans << endl;
 }
 
 int main()
 {
     fastread();
-    solve();
+    ll t;
+    cin >> t;
+    while (t--)
+    {
+        solve();
+    }
     return 0;
 };
