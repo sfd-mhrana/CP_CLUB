@@ -8,8 +8,7 @@ using namespace std;
     vector<ll> v(n);           \
     for (ll i = 0; i < n; i++) \
         cin >> v[i];
-#define fl(i, s, n) for (ll i = s; i < n; i++)
-#define rfl(i, n, s) for (int i = n; i >= s; i--)
+#define fl(i, n) for (ll i = 0; i < n; i++)
 #define py cout << "YES" << endl;
 #define pn cout << "NO" << endl;
 #define fastread() (ios_base::sync_with_stdio(false), cin.tie(NULL));
@@ -23,29 +22,23 @@ void solve()
 {
     ll n;
     cin >> n;
-    vinll(arr, n);
-    ll ans=0, prv=0;
-    fl(i, 1, n) if (arr[i] <= arr[prv])
+
+    vector<ll> arr(n);
+    for (ll i = 0; i < n; i++)
+        cin >> arr[i];
+
+    ll sum = 0, cnt1 = 0;
+
+    for (auto x : arr)
     {
-        ans += max(arr[i], arr[prv]) * (i - prv);
-        prv = i;
+        sum += x;
+        if (x == 1)
+            cnt1++;
     }
-    
-    if (prv != n - 1)
-    {
-        ll prev = n - 1;
-        rfl(i, n - 2, prv + 1)
-        {
-            if (arr[i] <= arr[prev])
-            {
-                ans += max(arr[i], arr[prev]) * (prev - i);
-                prev = i;
-            }
-        }
-        if (prev != prv)
-            ans += max(arr[prev], arr[prv]) * (prev - prv);
-    }
-    cout << ans << endl;
+    if (sum >= cnt1 + n && n > 1)
+        cout << "YES" << endl;
+    else
+        cout << "NO" << endl;
 }
 
 int main()
