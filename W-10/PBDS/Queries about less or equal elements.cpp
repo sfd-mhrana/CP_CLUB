@@ -1,5 +1,10 @@
 #include <bits/stdc++.h>
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+using namespace __gnu_pbds;
 using namespace std;
+template <typename T>
+using pbds = tree<T, null_type, less_equal<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
 #define ll long long
 #define endl "\n"
@@ -20,29 +25,30 @@ const int CAPITAL_LETTER_STATING_POINT = 65;
 
 void solve()
 {
-    string a, b;
-    bool f = false;
-    cin >> a >> b;
-    for (ll i = 0; i < (ll)a.size(); i++)
-        if ((a[i] == '0' && b[i] == '0') && (a[i + 1] == '1' && b[i + 1] == '1'))
-        {
-            f = true;
-            break;
-        }
-    if (f)
-        cout << "YES" << endl;
-    else
-        cout << "NO" << endl;
+    ll n, m;
+    cin >> n >> m;
+
+    pbds<ll> p;
+    fl(i, n)
+    {
+        ll x;
+        cin >> x;
+        p.insert(x);
+    }
+
+    fl(i, m)
+    {
+        ll x;
+        cin >> x;
+        cout << p.order_of_key(x + 1) << " ";
+    }
+
+    cout << endl;
 }
 
 int main()
 {
     fastread();
-    ll t;
-    cin >> t;
-    while (t--)
-    {
-        solve();
-    }
+    solve();
     return 0;
 };
